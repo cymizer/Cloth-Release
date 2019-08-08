@@ -102,3 +102,11 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+#skip my settings
+*.npy
+*.pkl
+*.h5
+*.pth
+material_GMM
+texture_GMM
