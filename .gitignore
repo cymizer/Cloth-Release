@@ -110,3 +110,4 @@ venv.bak/
 *.pth
 material_GMM
 texture_GMM
+test.py

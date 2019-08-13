@@ -22,6 +22,8 @@ Color = [
     'seaweed green', 'algae green', 'duck egg blue', 'dull blue', 'soft blue', 'light periwinkle', 'candy pink', 'pig pink'
 ]
 
+LOG_INTERVAL = 250
+
 # # test path
 # IMG_Root = 'Z:/Users/cymb103u/Desktop/HIPSTER'
 # Model_Root = 'Z:/Users/cymb103u/Desktop/WorkSpace/Cloth-Release/test'

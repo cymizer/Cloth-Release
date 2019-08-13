@@ -15,6 +15,7 @@ import time
 
 def work_flow(img_root):
     # material
+    print("Material Features Extraction...")
     start = time.time()
     material = feature_extract(img_root, 'material')
     end = time.time()
@@ -30,8 +31,10 @@ def work_flow(img_root):
     end = time.time()
     rtime = end - start
     print(
-        f"Extract : {etime : .3f}\nOptimize : {otime :.3f}\nReduce : {rtime : .3f}")
+        f"Extract time : {etime : .3f}\nOptimize time : {otime :.3f}\nReduce time : {rtime : .3f}")
+
     # texture
+    print("Texture Features Extraction...")
     start = time.time()
     texture = feature_extract(img_root, 'texture')
     end = time.time()
@@ -46,38 +49,38 @@ def work_flow(img_root):
     texture_pca = feature_reduce(texture_fv, 'texture')
     end = time.time()
     rtime = end - start
-
     print(
-        f"Extract : {etime : .3f}\nOptimize : {otime :.3f}\nReduce : {rtime : .3f}")
+        f"Extract time : {etime : .3f}\nOptimize time : {otime :.3f}\nReduce time : {rtime : .3f}")
 
     cuda.select_device(0)
     cuda.close()
 
     # color
+    print("Color Features Extraction...")
     start = time.time()
     color = feature_extract(img_root, 'color')
     color_pca = feature_reduce(color, 'color')
     end = time.time()
     col_time = end - start
-    print(f"Color : {col_time:.3f}")
+
+    print(f"Extract time : {col_time:.3f}")
     del material, material_fv, texture, texture_fv
 
     #######################################################################
-
-    # material_pca = np.load(f"{cfg.Feature_Root}/material_pca.npy")
-    # texture_pca = np.load(f"{cfg.Feature_Root}/texture_pca.npy")
-    # color_pca = np.load(f"{cfg.Feature_Root}/color_pca.npy")
 
     # concatenate features
     features = np.concatenate((material_pca, texture_pca, color_pca), axis=1)
 
     # K-Means Clustering
+    print("Features Clustering Computing...")
     start = time.time()
     kmeans = feature_cluster(features)
     end = time.time()
     ctime = end - start
     print(f"Clustering : {ctime : .3f}")
+
     # Visaulize
+    print("Visaulize Clustering Result...")
     start = time.time()
     feature_visualize(features, kmeans, False)
     end = time.time()
@@ -86,10 +89,15 @@ def work_flow(img_root):
     # Classification
     start = time.time()
     model = train(features, kmeans.labels_, epoch=50, draw=False)
+    end = time.time()
+    cls_train = end - start
+    print(f"Classification train time : {cls_train:.3f}")
+
+    start = time.time()
     test(features, kmeans.labels_, model)
     end = time.time()
-    cls_time = end - start
-    print(f"Classification : {cls_time:.3f}")
+    cls_test = end - start
+    print(f"Classifiction test time : {cls_test:.3f}")
 
 
 if __name__ == "__main__":

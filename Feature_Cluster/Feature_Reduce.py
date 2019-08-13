@@ -3,7 +3,7 @@ import configure as cfg
 from sklearn.model_selection import train_test_split
 from sklearn.decomposition import PCA
 import joblib
-
+import time
 
 def feature_reduce(feature, feature_type, importance=cfg.PCA_Importance, save=True):
     f"""
@@ -17,8 +17,17 @@ def feature_reduce(feature, feature_type, importance=cfg.PCA_Importance, save=Tr
     #print(f"start to dimension reduce")
 
     f_PCA = PCA(n_components=importance)
-    all_pca_feature = f_PCA.fit_transform(feature)
-
+    stime = time.time()
+    f_PCA.fit(feature)
+    etime = time.time()
+    tot = etime - stime
+    print(f"PCA fitting time : {tot:.3f}")
+    
+    stime = time.time()
+    all_pca_feature =  f_PCA.transform(feature)
+    etime = time.time()
+    tot = etime - stime
+    print(f"PCA transform time : {tot:.3f}")
     #print(f"finish......")
     if save:
         joblib.dump(f_PCA, f"{cfg.Model_Root}/{feature_type}_PCA.pkl")
