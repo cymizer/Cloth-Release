@@ -111,3 +111,4 @@ venv.bak/
 material_GMM
 texture_GMM
 test.py
+Cluster_result/*

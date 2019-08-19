@@ -3,6 +3,7 @@ import os
 import cv2
 import glob
 import configure as cfg
+from Utils import save_result
 from Feature_Cluster.Feature_Extract import feature_extract
 from Feature_Cluster.Feature_Optimize import feature_optimize
 from Feature_Cluster.Feature_Reduce import feature_reduce
@@ -20,18 +21,19 @@ def work_flow(img_root):
     material = feature_extract(img_root, 'material')
     end = time.time()
     etime = end - start
+    print(f"Extract time : {etime : .3f}\n")
 
     start = time.time()
     material_fv = feature_optimize(material, 'material')
     end = time.time()
     otime = end-start
+    print(f"Optimize time : {otime :.3f}\n")
 
     start = time.time()
     material_pca = feature_reduce(material_fv, 'material')
     end = time.time()
     rtime = end - start
-    print(
-        f"Extract time : {etime : .3f}\nOptimize time : {otime :.3f}\nReduce time : {rtime : .3f}")
+    print(f"Reduce time : {rtime : .3f}\n")
 
     # texture
     print("Texture Features Extraction...")
@@ -39,18 +41,19 @@ def work_flow(img_root):
     texture = feature_extract(img_root, 'texture')
     end = time.time()
     etime = end - start
+    print(f"Extract time : {etime : .3f}\n")
 
     start = time.time()
     texture_fv = feature_optimize(texture, 'texture')
     end = time.time()
     otime = end-start
+    print(f"Optimize time : {otime :.3f}\n")
 
     start = time.time()
     texture_pca = feature_reduce(texture_fv, 'texture')
     end = time.time()
     rtime = end - start
-    print(
-        f"Extract time : {etime : .3f}\nOptimize time : {otime :.3f}\nReduce time : {rtime : .3f}")
+    print(f"Reduce time : {rtime :.3f}\n")
 
     cuda.select_device(0)
     cuda.close()
@@ -75,20 +78,24 @@ def work_flow(img_root):
     print("Features Clustering Computing...")
     start = time.time()
     kmeans = feature_cluster(features)
-    end = time.time()
+    end = time.time() 
     ctime = end - start
-    print(f"Clustering : {ctime : .3f}")
+    print(f"Clustering : {ctime :.3f}")
+
+    # Save Img Result
+    save_result(cfg.IMG_Root, kmeans.labels_, cfg.Cluster_result)
 
     # Visaulize
     print("Visaulize Clustering Result...")
     start = time.time()
-    feature_visualize(features, kmeans, False)
+    feature_visualize(features, kmeans)
     end = time.time()
     vtime = end-start
     print(f"Visualize : {vtime :.3f}")
+
     # Classification
     start = time.time()
-    model = train(features, kmeans.labels_, epoch=50, draw=False)
+    model = train(features, kmeans.labels_, epoch=25, draw=True)
     end = time.time()
     cls_train = end - start
     print(f"Classification train time : {cls_train:.3f}")

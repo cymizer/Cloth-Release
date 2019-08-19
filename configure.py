@@ -1,13 +1,15 @@
-IMG_Root = 'Z:/Users/cymb103u/Desktop/Dataset/Img/female'
+IMG_Root = 'Z:/Users/cymb103u/Desktop/Dataset/HIPSTER'
+#IMG_Root = 'Z:/Users/cymb103u/Desktop/Dataset/Img/female'
+
 Result_save = './Result'
 WorkSpace_Root = '.'
 Model_Root = './Model'
 Feature_Root = './Feature'
-
+Cluster_result ='./Cluster_result'
 
 GMM_Kernel = 5
 PCA_Importance = 0.95
-Clusters = 60
+Clusters = 5
 
 Color = [
     'black', 'red', 'bright orange', 'orange yellow', 'golden', 'sunshine yellow', 'olive green', 'light lime', 'frog green', 'cool green', 'bright aqua',
@@ -22,7 +24,7 @@ Color = [
     'seaweed green', 'algae green', 'duck egg blue', 'dull blue', 'soft blue', 'light periwinkle', 'candy pink', 'pig pink'
 ]
 
-LOG_INTERVAL = 250
+LOG_INTERVAL = 100
 
 # # test path
 # IMG_Root = 'Z:/Users/cymb103u/Desktop/HIPSTER'

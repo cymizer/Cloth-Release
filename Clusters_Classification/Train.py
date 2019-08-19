@@ -65,9 +65,9 @@ def train(features, feature_labels, epoch=50, save_model=True, draw=True):
             optimizer.step()
 
             if batch_idx % cfg.LOG_INTERVAL == 0:
-                print('Train Epoch: {} [{}/{} ({:.0f}%)]\t corrects:{:.4f}\tLoss: {:.4f}'.format(
-                    i+1, batch_idx * len(feature), len(train_loader.dataset),
-                    100. * batch_idx / len(train_loader), training_corrects, loss.item()))
+                print('Train Epoch: {} [{}/{} ({:.0f}%)]\t Corrects:{:.4f}\tLoss: {:.4f}'.format(
+                    i+1, (batch_idx+1) * len(feature), len(train_loader.dataset),
+                    100. * (batch_idx+1) / len(train_loader), training_corrects, loss.item()))
 
         training_loss = training_loss / len(train_set)
         training_acc = training_corrects.double() / len(train_set)

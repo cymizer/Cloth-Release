@@ -16,12 +16,12 @@ def feature_optimize(features, feature_type, save=True):
     features_size = features.shape[1]
     features = np.reshape(features, (-1, 1, features_size))
 
-    # print(f"All {feature_type} shape: {features.shape}")
+    print(f"All {feature_type} shape: {features.shape}\n")
 
     fv_gmm = FisherVectorGMM(n_kernels=cfg.GMM_Kernel).fit(
         features, model_dump_path=cfg.Model_Root+'/'+feature_type + '_GMM', verbose=False)
 
-    # print(f"{feature_type} GMM training completed!!!")
+    print(f"{feature_type} GMM training completed!!!\n")
 
     all_fv = []
     for f in features:
@@ -29,7 +29,7 @@ def feature_optimize(features, feature_type, save=True):
         fv = fv.flatten()
         all_fv.append(fv)
     all_fv = np.asarray(all_fv)
-    # print(f"All {feature_type} fisher vector shape: {all_fv.shape}")
+    print(f"All {feature_type} fisher vector shape: {all_fv.shape}\n")
     if save:
         np.save(f"{cfg.Feature_Root}/{feature_type}_fv.npy", all_fv)
     return all_fv

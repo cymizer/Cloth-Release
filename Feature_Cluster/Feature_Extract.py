@@ -57,7 +57,7 @@ def feature_extract(img_root, feature_type='color', save=True):
         all_feature = np.asarray(all_feature, dtype=np.float32)
         all_feature = np.reshape(all_feature, (-1, 2048))
     else:
-        for i in all_img_file:
+        for index, i in enumerate(all_img_file):
             img = cv2.imread(i)
             hist = cv2.calcHist([img], [0, 1, 2], None, [8, 8, 8], [
                                 0, 256, 0, 256, 0, 256])  # 512 dim
