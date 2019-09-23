@@ -6,3 +6,4 @@ matplotlib
 numba
 opencv-python
 seaborn
+easydict
