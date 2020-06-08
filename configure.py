@@ -1,5 +1,6 @@
-IMG_Root = 'Z:/Users/cymb103u/Desktop/Dataset/HIPSTER'
+IMG_Root = 'Z:/Users/cymb103u/Desktop/Dataset/input'
 #IMG_Root = 'Z:/Users/cymb103u/Desktop/Dataset/Img/female'
+
 
 Result_save = './Result'
 WorkSpace_Root = '.'
@@ -7,9 +8,13 @@ Model_Root = './Model'
 Feature_Root = './Feature'
 Cluster_result ='./Cluster_result'
 
+# Pattern  
+# material, texture, color
+Pattern = [False, False, True] 
+
 GMM_Kernel = 5
 PCA_Importance = 0.95
-Clusters = 5
+Clusters = 20
 
 Color = [
     'black', 'red', 'bright orange', 'orange yellow', 'golden', 'sunshine yellow', 'olive green', 'light lime', 'frog green', 'cool green', 'bright aqua',
@@ -30,3 +35,4 @@ LOG_INTERVAL = 100
 # IMG_Root = 'Z:/Users/cymb103u/Desktop/HIPSTER'
 # Model_Root = 'Z:/Users/cymb103u/Desktop/WorkSpace/Cloth-Release/test'
 # Feature_Root = 'Z:/Users/cymb103u/Desktop/WorkSpace/Cloth-Release/test'
+GPU_ID ='cuda:0'

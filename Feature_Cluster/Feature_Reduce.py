@@ -30,7 +30,7 @@ def feature_reduce(feature, feature_type, importance=cfg.PCA_Importance, save=Tr
     print(f"PCA transform time : {tot:.3f}")
     #print(f"finish......")
     if save:
-        joblib.dump(f_PCA, f"{cfg.Model_Root}/{feature_type}_PCA.pkl")
+        joblib.dump(f_PCA, f"{cfg.Model_Root}/{cfg.Clusters}_{feature_type}_PCA.pkl")
         np.save(f'{cfg.Feature_Root}/{feature_type}_pca.npy', all_pca_feature)
 
     return all_pca_feature

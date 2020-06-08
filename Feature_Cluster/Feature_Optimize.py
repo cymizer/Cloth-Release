@@ -19,7 +19,7 @@ def feature_optimize(features, feature_type, save=True):
     print(f"All {feature_type} shape: {features.shape}\n")
 
     fv_gmm = FisherVectorGMM(n_kernels=cfg.GMM_Kernel).fit(
-        features, model_dump_path=cfg.Model_Root+'/'+feature_type + '_GMM', verbose=False)
+        features, model_dump_path=f"{cfg.Model_Root}/{cfg.Clusters}_{feature_type}_GMM", verbose=False)
 
     print(f"{feature_type} GMM training completed!!!\n")
 

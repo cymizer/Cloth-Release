@@ -108,7 +108,7 @@ venv.bak/
 *.pkl
 *.h5
 *.pth
-material_GMM
-texture_GMM
+*material_GMM
+*texture_GMM
 test.py
 Cluster_result/*
