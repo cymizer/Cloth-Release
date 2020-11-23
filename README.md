@@ -1,5 +1,6 @@
 # 衣著流行元素分析說明文件
-
+## 共同開發
+[hwx107m](https://github.com/hwx107m)
 ## 環境需要
     python==3.6
     tensorflow-gpu==1.8.0
